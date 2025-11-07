@@ -35,24 +35,28 @@ const Hero = () => {
         delay: 1,
       });
 
+      // Video timelline
+
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: videoRef.current,
-          start: "start 60%",
+          start: "center 60%",
           end: "bottom top",
-          scrub: true,
+          scrub: 1.5,
           pin: true,
         },
       });
 
       if (videoRef.current) {
-        videoRef.current.onloadmetadata = () => {
+        videoRef.current.onloadedmetadata = () => {
           tl.to(videoRef.current, {
             currentTime: videoRef.current.duration || 0,
           });
         };
       }
     },
+
+    // wait for video to load metadata
 
     { scope: containerRef }
   );
@@ -117,7 +121,7 @@ const Hero = () => {
           muted
           playsInline
           preload="auto"
-          src="/videos/input.mp4"
+          src="/videos/output.mp4"
           className="w-full md:h-[80%] h-1/2 absolute bottom-0 left-0 md:object-contain object-bottom object-cover"
         />
       </div>
